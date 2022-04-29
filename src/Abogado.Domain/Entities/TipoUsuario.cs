@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Abogado.Domain
+namespace Abogado.Domain.Entities
 {
-    public abstract class Entity
+    public enum TipoUsuario
     {
-        public int Id { get; set; }
+        abogado = 0,
+        aux = 1,
+        cliente = 2
     }
 }

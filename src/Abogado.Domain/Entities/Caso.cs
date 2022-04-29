@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Abogado.Domain
+namespace Abogado.Domain.Entities
 {
     public class Caso : Entity
     {

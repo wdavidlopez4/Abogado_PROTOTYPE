@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Abogado.Domain
+namespace Abogado.Domain.Entities
 {
-    public enum TipoUsuario
+    public enum FormaDivorcio
     {
-        abogado = 0,
-        aux = 1,
-        cliente = 2
+        voluntario = 0,
     }
 }

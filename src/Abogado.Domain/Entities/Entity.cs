@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Abogado.Domain
+namespace Abogado.Domain.Entities
 {
-    public enum FormaDivorcio
+    public abstract class Entity
     {
-        voluntario = 0,
+        public int Id { get; set; }
     }
 }
