@@ -1,0 +1,63 @@
+﻿@using Abogado.Domain.Entities
+@model Usuario
+@{
+    ViewData["Title"] = "Usuarios";
+}
+
+<div class="form-row">
+    <div class="col-md-12">
+        <form method="post" asp-controller="Usuario" asp-action="Registrar" class="form-group">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!--nombre-->
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" type="text" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <!--apellido-->
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" type="text" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+
+            <!--correo-->
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" type="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!--password-->
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <!--tipo-->
+            <select class="form-group" aria-label="ninguno" asp-for="TipoUsuario">
+                <option selected>Seleccione un tipo</option>
+                <option value=0>Abogado</option>
+            </select>
+
+
+            <div class="container">
+                <div class="row">
+                    <!--enviar formulario-->
+                    <div class="col-sm">
+                        <input type="submit" value="Registrar" class="btn btn-outline-dark" />
+                    </div>
+                    <!--regresar-->
+                    <div class="col-sm">
+                        <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Retornar</a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

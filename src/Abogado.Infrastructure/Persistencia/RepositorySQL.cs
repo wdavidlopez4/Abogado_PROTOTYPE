@@ -44,6 +44,18 @@ namespace Abogado.Infrastructure.Persistencia
             }
         }
 
+        public async Task<T> Get<T>(Expression<Func<T, bool>> expression) where T : Entity
+        {
+            try
+            {
+                return await context.Set<T>().FirstOrDefaultAsync(expression);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"no se completo la operacion: {e.Message}");
+            }
+        }
+
         public async Task<List<T>> GetAll<T>() where T : Entity
         {
             try

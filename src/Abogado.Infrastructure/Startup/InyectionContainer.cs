@@ -1,4 +1,5 @@
-﻿using Abogado.Domain.Ports;
+﻿using Abogado.Application;
+using Abogado.Domain.Ports;
 using Abogado.Infrastructure.Persistencia;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +15,7 @@ namespace Abogado.Infrastructure.Startup
         public static void Inyection(IServiceCollection services)
         {
             services.AddScoped<IRepository, RepositorySQL>();
+            services.AddScoped<UsersServices>();
         }
     }
 }

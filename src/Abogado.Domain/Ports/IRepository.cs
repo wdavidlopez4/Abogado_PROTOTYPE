@@ -14,6 +14,8 @@ namespace Abogado.Domain.Ports
 
         public Task<T> Get<T>(string id) where T : Entity;
 
+        public Task<T> Get<T>(Expression<Func<T, bool>> expression) where T : Entity;
+
         public Task<List<T>> GetAll<T>() where T : Entity;
 
         public Task Update<T>(T obj) where T : Entity;

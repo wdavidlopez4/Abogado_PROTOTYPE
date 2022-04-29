@@ -33,11 +33,14 @@ namespace Abogado.Application
             await this.repository.Save<Usuario>(user);
         }
 
-        public bool Login(string correo, string password)
+        public async Task<Usuario> Login(string correo, string password)
         {
-            return this.repository.Exists<Usuario>(x => 
-                x.Email == correo &&
-                x.Password == password);
+            Usuario usuario = null;
+            if (this.repository.Exists<Usuario>(x => x.Email == correo))
+                usuario = await this.repository.Get<Usuario>(
+                    x => x.Email == correo && x.Password == password);
+
+            return usuario;
         }
 
         public bool Verificar(string correo, TipoUsuario tipoUsuario)
