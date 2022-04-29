@@ -23,6 +23,12 @@ namespace Abogado.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Permisos()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login([Bind("Email,Password")] Usuario usuario)
         {
@@ -37,17 +43,19 @@ namespace Abogado.Web.Controllers
         [HttpGet]
         public IActionResult Registrar()
         {
-            return View();
+            if (TempData["Tipo"].ToString() == "0")
+            {
+                return View();
+            }
+
+            return RedirectToAction("Permisos", "Usuario");
         }
 
         [HttpPost]
         public async Task<IActionResult> Registrar(
             [Bind("Nombre,Apellido,Email,Password,TipoUsuario")]  Usuario usuario)
         {
-            TempData["Email"] = usuario.Email;
-            TempData["Tipo"] = usuario.TipoUsuario.GetHashCode();
-
-            await this.services.Register(usuario.Nombre, usuario.Apellido, 
+            await this.services.Register(usuario.Nombre, usuario.Apellido,
                 usuario.Email, usuario.Password, usuario.TipoUsuario);
 
             return RedirectToAction("Index", "Home");
