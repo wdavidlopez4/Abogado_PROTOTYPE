@@ -64,5 +64,17 @@ namespace Abogado.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> ListarUsuario()
+        {
+            if (memoryCache.Get("TIPO") == null)
+                return RedirectToAction("Index", "Home");
+            else if (memoryCache.Get("TIPO").ToString() == "2")
+                return RedirectToAction("Permisos", "Caso");
+
+            var users = await services.Listar();
+            return View(users);
+        }
     }
 }
