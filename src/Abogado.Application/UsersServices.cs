@@ -48,5 +48,10 @@ namespace Abogado.Application
             return this.repository.Exists<Usuario>(x => 
                 x.Email == correo && x.TipoUsuario == tipoUsuario);
         }
+
+        public async Task<List<Usuario>> Listar()
+        {
+            return await this.repository.GetAll<Usuario>();
+        }
     }
 }

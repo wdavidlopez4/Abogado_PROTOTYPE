@@ -16,6 +16,7 @@ namespace Abogado.Infrastructure.Startup
         {
             services.AddScoped<IRepository, RepositorySQL>();
             services.AddScoped<UsersServices>();
+            services.AddScoped<CasosServices>();
         }
     }
 }

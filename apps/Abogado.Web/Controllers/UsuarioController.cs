@@ -42,11 +42,11 @@ namespace Abogado.Web.Controllers
 
         [HttpGet]
         public IActionResult Registrar()
-        {
-            if (TempData["Tipo"].ToString() == "0")
-            {
+        {   
+            if (TempData["Tipo"] == null)
+                return RedirectToAction("Index", "Home");
+            else if (TempData["Tipo"].ToString() == "0")
                 return View();
-            }
 
             return RedirectToAction("Permisos", "Usuario");
         }
