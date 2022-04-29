@@ -22,10 +22,8 @@ namespace Abogado.Application
 
         public async Task Crear(string NombreCaso, string Descripcion, Proceso Proceso,
             FormaDivorcio FormaDivorcio, MecanismoDisolucion mecanismoDisolucion,
-            string? Archivo, DateTime? FechaInicio, int UsuarioId, IFormFile archivo)
+            DateTime? FechaInicio, int UsuarioId, IFormFile archivo)
         {
-            await SubirArchivo(archivo);
-
             var caso = new Caso 
             { 
                 NombreCaso = NombreCaso,
@@ -33,27 +31,26 @@ namespace Abogado.Application
                 Proceso = Proceso,
                 FormaDivorcio = FormaDivorcio,
                 mecanismoDisolucion = mecanismoDisolucion,
-                Archivo = Archivo,
+                RutaArchivo = await SubirArchivo(archivo),
                 FechaInicio = FechaInicio,
                 UsuarioId = UsuarioId
             };
             await this.repository.Save<Caso>(caso);
         }
 
-        public async Task Monificar(string NombreCaso, string Descripcion, Proceso Proceso,
+        public async Task Monificar(int idCaso, string NombreCaso, string Descripcion, Proceso Proceso,
             FormaDivorcio FormaDivorcio, MecanismoDisolucion mecanismoDisolucion,
-            string? Archivo, DateTime? FechaInicio, int UsuarioId, IFormFile archivo)
+            DateTime? FechaInicio, int UsuarioId, IFormFile archivo)
         {
-            await SubirArchivo(archivo);
-
             var caso = new Caso
             {
+                Id = idCaso,
                 NombreCaso = NombreCaso,
                 Descripcion = Descripcion,
                 Proceso = Proceso,
                 FormaDivorcio = FormaDivorcio,
                 mecanismoDisolucion = mecanismoDisolucion,
-                Archivo = Archivo,
+                RutaArchivo = await SubirArchivo(archivo),
                 FechaInicio = FechaInicio,
                 UsuarioId = UsuarioId
             };
@@ -70,7 +67,7 @@ namespace Abogado.Application
             return await this.repository.Get<Caso>(id);
         }
 
-        private async static Task SubirArchivo(IFormFile archivo)
+        private async static Task<String> SubirArchivo(IFormFile archivo)
         {
             Random rnd = new Random();
             int rndx = rnd.Next(0, 1000000);
@@ -79,6 +76,8 @@ namespace Abogado.Application
 
             using var stream = new FileStream(ruta, FileMode.Create);
             await archivo.CopyToAsync(stream);
+
+            return ruta;
         }
     }
 }

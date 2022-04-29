@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Abogado.Infrastructure.Migrations
 {
-    public partial class Migration1 : Migration
+    public partial class Migration2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,7 +35,7 @@ namespace Abogado.Infrastructure.Migrations
                     Proceso = table.Column<int>(type: "int", nullable: false),
                     FormaDivorcio = table.Column<int>(type: "int", nullable: false),
                     mecanismoDisolucion = table.Column<int>(type: "int", nullable: false),
-                    Archivo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RutaArchivo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     FechaInicio = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UsuarioId = table.Column<int>(type: "int", nullable: true)
                 },

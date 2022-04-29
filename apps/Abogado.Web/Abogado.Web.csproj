@@ -15,4 +15,8 @@
     <ProjectReference Include="..\..\src\Abogado.Infrastructure\Abogado.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CasosPDF\" />
+  </ItemGroup>
+
 </Project>

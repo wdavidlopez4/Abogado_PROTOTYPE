@@ -11,5 +11,7 @@ namespace Abogado.Web.Models
         public Caso Caso { get; set; }
 
         public List<Usuario> Usuarios { get; set; }
+
+        public List<Caso> Casos { get; set; }
     }
 }
