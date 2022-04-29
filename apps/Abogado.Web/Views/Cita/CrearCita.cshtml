@@ -1,0 +1,42 @@
+﻿@using Abogado.Domain.Entities
+@model Cita
+@{
+    ViewData["Title"] = "CrearCita";
+}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Asigne una fecha para la cita</h1>
+        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+    </div>
+</div>
+
+<div class="form-row">
+    <div class="col-md-12">
+        <form method="post" asp-controller="Cita" asp-action="CrearCita" class="form-group">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!--nombre-->
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" type="date" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <!--enviar formulario-->
+                    <div class="col-sm">
+                        <input type="submit" value="Registrar" class="btn btn-outline-dark" />
+                    </div>
+                    <!--regresar-->
+                    <div class="col-sm">
+                        <a class="btn btn-outline-dark" asp-area="" asp-controller="Home" asp-action="Index">Retornar</a>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
