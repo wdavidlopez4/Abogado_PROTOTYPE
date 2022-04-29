@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abogado.Application", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abogado.Infrastructure", "src\Abogado.Infrastructure\Abogado.Infrastructure.csproj", "{ED1AFDC0-F889-4BC6-A190-EB35AF8C0D91}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abogado.Web", "apps\Abogado.Web\Abogado.Web.csproj", "{D09E4D03-E573-4F00-B4E5-10ABEF241B36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{ED1AFDC0-F889-4BC6-A190-EB35AF8C0D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED1AFDC0-F889-4BC6-A190-EB35AF8C0D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED1AFDC0-F889-4BC6-A190-EB35AF8C0D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D09E4D03-E573-4F00-B4E5-10ABEF241B36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D09E4D03-E573-4F00-B4E5-10ABEF241B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D09E4D03-E573-4F00-B4E5-10ABEF241B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D09E4D03-E573-4F00-B4E5-10ABEF241B36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{9D7DFCF7-9677-46C2-8F3F-CD0C82436C02} = {8163A2AB-036E-4CB0-8F4A-445BBF553DA5}
 		{E3026444-0F07-4BFB-A981-8382B552AFF4} = {8163A2AB-036E-4CB0-8F4A-445BBF553DA5}
 		{ED1AFDC0-F889-4BC6-A190-EB35AF8C0D91} = {8163A2AB-036E-4CB0-8F4A-445BBF553DA5}
+		{D09E4D03-E573-4F00-B4E5-10ABEF241B36} = {C5907529-7DB5-4EA3-B922-9E63E603F0D7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BD18D32F-4E6A-442C-9B27-9CCCB4DB5C83}
