@@ -50,7 +50,7 @@ namespace Abogado.Web.Controllers
             await this.services.Register(usuario.Nombre, usuario.Apellido, 
                 usuario.Email, usuario.Password, usuario.TipoUsuario);
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
