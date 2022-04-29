@@ -1,6 +1,7 @@
 ﻿using Abogado.Application;
 using Abogado.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,12 @@ namespace Abogado.Web.Controllers
     {
         private readonly UsersServices services;
 
-        public UsuarioController(UsersServices services)
+        private readonly IMemoryCache memoryCache;
+
+        public UsuarioController(UsersServices services, IMemoryCache memoryCache)
         {
             this.services = services;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
@@ -34,8 +38,8 @@ namespace Abogado.Web.Controllers
         {
             var us = await this.services.Login(usuario.Email, usuario.Password);
 
-            TempData["Tipo"] = us.TipoUsuario.GetHashCode();
-            TempData["Email"] = us.Email;
+            memoryCache.Set("TIPO", us.TipoUsuario.GetHashCode());
+            memoryCache.Set("MAIL", us.Email);
 
             return RedirectToAction("Index", "Home");
         }
@@ -43,9 +47,9 @@ namespace Abogado.Web.Controllers
         [HttpGet]
         public IActionResult Registrar()
         {   
-            if (TempData["Tipo"] == null)
+            if (memoryCache.Get("TIPO") == null)
                 return RedirectToAction("Index", "Home");
-            else if (TempData["Tipo"].ToString() == "0")
+            else if (memoryCache.Get("TIPO").ToString() == "0")
                 return View();
 
             return RedirectToAction("Permisos", "Usuario");

@@ -3,6 +3,7 @@ using Abogado.Domain.Entities;
 using Abogado.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,18 +17,21 @@ namespace Abogado.Web.Controllers
 
         private readonly UsersServices Usersservices;
 
-        public CasoController(CasosServices services, UsersServices Usersservices)
+        private readonly IMemoryCache memoryCache;
+
+        public CasoController(CasosServices services, UsersServices Usersservices, IMemoryCache memoryCache)
         {
             this.CasoServices = services;
             this.Usersservices = Usersservices;
+            this.memoryCache = memoryCache;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            if (TempData["Tipo"] == null)
+            if (memoryCache.Get("TIPO") == null)
                 return RedirectToAction("Index", "Home");
-            else if (TempData["Tipo"].ToString() == "0")
+            else if (memoryCache.Get("TIPO").ToString() == "0")
                 return View();
             
             return RedirectToAction("Permisos", "Caso");
@@ -45,7 +49,7 @@ namespace Abogado.Web.Controllers
         [HttpGet]
         public IActionResult CrearCaso(string idUser)
         {
-            TempData["USUARIO_ID"] = idUser;
+            TempData["USUARIO_ID_CASO"] = idUser;
             return View();
         }
 
@@ -55,7 +59,7 @@ namespace Abogado.Web.Controllers
             DateTime FechaInicio, Proceso Proceso, FormaDivorcio FormaDivorcio,
             MecanismoDisolucion MecanismoDisolucion, IFormCollection Archivo)
         {
-            string usuarioId = TempData["USUARIO_ID"].ToString();
+            string usuarioId = TempData["USUARIO_ID_CASO"].ToString();
 
             await this.CasoServices.Crear(
                 NombreCaso: NombreCaso,
