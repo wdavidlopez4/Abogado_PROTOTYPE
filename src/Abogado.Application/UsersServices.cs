@@ -37,7 +37,13 @@ namespace Abogado.Application
         {
             return this.repository.Exists<Usuario>(x => 
                 x.Email == correo &&
-                x.Password == password) == true;
+                x.Password == password);
+        }
+
+        public bool Verificar(string correo, TipoUsuario tipoUsuario)
+        {
+            return this.repository.Exists<Usuario>(x => 
+                x.Email == correo && x.TipoUsuario == tipoUsuario);
         }
     }
 }
