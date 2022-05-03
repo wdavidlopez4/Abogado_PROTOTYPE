@@ -5,6 +5,7 @@ using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Abogado.Web.Controllers
@@ -40,6 +41,10 @@ namespace Abogado.Web.Controllers
 
             memoryCache.Set("TIPO", us.TipoUsuario.GetHashCode());
             memoryCache.Set("MAIL", us.Email);
+
+            ClaimsIdentity claimsIdentity = new();
+            claimsIdentity.AddClaim(new Claim("ACCESO", "1"));
+            User.AddIdentity(claimsIdentity);
 
             return RedirectToAction("Index", "Home");
         }
