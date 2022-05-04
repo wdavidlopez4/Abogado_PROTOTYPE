@@ -14,10 +14,13 @@ namespace Abogado.Application
     {
         private readonly IRepository repository;
 
-        public CasosServices(IRepository repository)
+        private readonly HistoricosServices historicosServices;
+
+        public CasosServices(IRepository repository, HistoricosServices historicosServices)
         {
             //inyection container
             this.repository = repository;
+            this.historicosServices = historicosServices;
         }
 
         public async Task Crear(string NombreCaso, string Descripcion, Proceso Proceso,
@@ -35,7 +38,12 @@ namespace Abogado.Application
                 FechaInicio = FechaInicio,
                 UsuarioId = UsuarioId
             };
+
             await this.repository.Save<Caso>(caso);
+
+            await this.historicosServices.Crear(CasoId: caso.Id, Descripcion: caso.Descripcion,
+                Fecha: caso.FechaInicio.Value, NombreCaso: caso.NombreCaso, Proceso: caso.Proceso,
+                FormaDivorcio: caso.FormaDivorcio, mecanismoDisolucion: mecanismoDisolucion);
         }
 
         public async Task Monificar(int idCaso, string NombreCaso, string Descripcion, Proceso Proceso,
@@ -55,6 +63,10 @@ namespace Abogado.Application
                 UsuarioId = UsuarioId
             };
             await this.repository.Update<Caso>(caso);
+
+            await this.historicosServices.Crear(CasoId: caso.Id, Descripcion: caso.Descripcion,
+                Fecha: caso.FechaInicio.Value, NombreCaso: caso.NombreCaso, Proceso: caso.Proceso,
+                FormaDivorcio: caso.FormaDivorcio, mecanismoDisolucion: mecanismoDisolucion);
         }
 
         public async Task<List<Caso>> Listar()

@@ -16,6 +16,8 @@ namespace Abogado.Infrastructure.Persistencia
 
         public DbSet<Usuario> Usuarios { get; set; }
 
+        public DbSet<HistoricoCaso> Historicos { get; set; }
+
         public AbogadoContext(DbContextOptions<AbogadoContext> options) : base(options)
         {
 

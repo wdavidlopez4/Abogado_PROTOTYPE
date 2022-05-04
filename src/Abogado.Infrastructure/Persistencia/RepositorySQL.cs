@@ -100,5 +100,20 @@ namespace Abogado.Infrastructure.Persistencia
                 throw new Exception($"no se completo la operacion: {e.Message}");
             }
         }
+
+        public async Task<List<T>> GetAll<T>(
+            Expression<Func<T, bool>> expression) where T : Entity
+        {
+            try
+            {
+                return await context.Set<T>()
+                    .Where(expression)
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"no se completo la operacion: {e.Message}");
+            }
+        }
     }
 }

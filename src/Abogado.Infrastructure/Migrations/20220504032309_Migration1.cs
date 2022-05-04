@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Abogado.Infrastructure.Migrations
 {
-    public partial class Migration2 : Migration
+    public partial class Migration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,6 +70,31 @@ namespace Abogado.Infrastructure.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Historicos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CasoId = table.Column<int>(type: "int", nullable: false),
+                    Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fecha = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NombreCaso = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Proceso = table.Column<int>(type: "int", nullable: false),
+                    FormaDivorcio = table.Column<int>(type: "int", nullable: false),
+                    mecanismoDisolucion = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Historicos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Historicos_Casos_CasoId",
+                        column: x => x.CasoId,
+                        principalTable: "Casos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Casos_UsuarioId",
                 table: "Casos",
@@ -79,15 +104,23 @@ namespace Abogado.Infrastructure.Migrations
                 name: "IX_Cita_UsuarioId",
                 table: "Cita",
                 column: "UsuarioId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Historicos_CasoId",
+                table: "Historicos",
+                column: "CasoId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Casos");
+                name: "Cita");
 
             migrationBuilder.DropTable(
-                name: "Cita");
+                name: "Historicos");
+
+            migrationBuilder.DropTable(
+                name: "Casos");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

@@ -20,5 +20,7 @@ namespace Abogado.Domain.Entities
         public IFormFile Archivo { get; set; }
         public DateTime? FechaInicio { get; set; }
         public int? UsuarioId { get; set; }
+
+        public List<HistoricoCaso> Historicos { get; set; }
     }
 }

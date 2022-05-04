@@ -18,6 +18,7 @@ namespace Abogado.Infrastructure.Startup
             services.AddScoped<UsersServices>();
             services.AddScoped<CasosServices>();
             services.AddScoped<CitasServices>();
+            services.AddScoped<HistoricosServices>();
         }
     }
 }

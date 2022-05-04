@@ -16,6 +16,7 @@
     <table class="table table-dark">
         <thead>
             <tr>
+                <th scope="col">Detalle</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">forma</th>
                 <th scope="col">mecanismo</th>
@@ -28,6 +29,15 @@
             @foreach (var caso in Model.Casos)
             {
             <tr>
+                <th scope="row">
+                    <a class="btn btn-outline-info"
+                       asp-area=""
+                       asp-controller="Historico"
+                       asp-action="Index"
+                       asp-route-CasoId="@caso.Id">
+                        Ver
+                    </a>
+                </th>
                 <td>@caso.NombreCaso</td>
                 <td>@caso.FormaDivorcio</td>
                 <td>@caso.mecanismoDisolucion</td>
