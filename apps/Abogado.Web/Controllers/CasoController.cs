@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -128,6 +129,13 @@ namespace Abogado.Web.Controllers
                 UsuarioId: caso.UsuarioId.Value);
 
             return RedirectToAction("ListarCasos", "Caso");
+        }
+
+        [HttpGet]
+        public async Task<FileResult> DownloadFile(string CasoId)
+        {
+            var file = await this.CasoServices.PrepararArchivoParaDescargar(CasoId);
+            return File(file, "application/pdf",  "caso_archivo.pdf");
         }
     }
 }

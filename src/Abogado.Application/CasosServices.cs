@@ -91,5 +91,14 @@ namespace Abogado.Application
 
             return ruta;
         }
+
+        public async Task<FileStream> PrepararArchivoParaDescargar(string id)
+        {
+            //consulto el caso 
+            var caso = await this.Consultar(id);
+
+            //leo el archivo  y lo comvierto a strinam
+            return new FileStream(caso.RutaArchivo, FileMode.Open);
+        }
     }
 }

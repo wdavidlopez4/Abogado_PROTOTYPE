@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th scope="col">Detalle</th>
+                <th scope="col">descargar pdf</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">forma</th>
                 <th scope="col">mecanismo</th>
@@ -36,6 +37,15 @@
                        asp-action="Index"
                        asp-route-CasoId="@caso.Id">
                         Ver
+                    </a>
+                </th>
+                <th scope="row">
+                    <a class="btn btn-outline-info"
+                       asp-area=""
+                       asp-controller="Caso"
+                       asp-action="DownloadFile"
+                       asp-route-CasoId="@caso.Id">
+                        ir
                     </a>
                 </th>
                 <td>@caso.NombreCaso</td>
