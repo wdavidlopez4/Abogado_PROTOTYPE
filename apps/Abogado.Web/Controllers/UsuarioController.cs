@@ -81,5 +81,23 @@ namespace Abogado.Web.Controllers
             var users = await services.Listar();
             return View(users);
         }
+
+        [HttpGet]
+        public IActionResult Actualizar(string UserId)
+        {
+            TempData["USUARIO_ID_MODIFICAR"] = UserId;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Actualizar(Usuario usuario)
+        {
+            var id = TempData["USUARIO_ID_MODIFICAR"].ToString();
+
+            await services.Modificar(int.Parse(id), usuario.Nombre, usuario.Apellido,
+                usuario.Email, usuario.Password, usuario.TipoUsuario);
+
+            return RedirectToAction("ListarUsuario", "Usuario");
+        }
     }
 }

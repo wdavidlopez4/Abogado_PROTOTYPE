@@ -53,5 +53,19 @@ namespace Abogado.Application
         {
             return await this.repository.GetAll<Usuario>();
         }
+
+        public async Task Modificar(int id, string nombre, string apellido,
+            string correo, string password, TipoUsuario tipoUsuario)
+        {
+            var usuario = await this.repository.Get<Usuario>(x => x.Id == id);
+
+            usuario.Nombre = nombre;
+            usuario.Apellido = apellido;
+            usuario.Email = correo;
+            usuario.Password = password;
+            usuario.TipoUsuario = tipoUsuario;
+
+            await this.repository.Update<Usuario>(usuario);
+        }
     }
 }

@@ -7,7 +7,13 @@
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">Lista de usuarios</h1>
-        <p class="lead">informacion general</p>
+        <p class="lead">Crear un usuario</p>
+        <a class="btn btn-outline-info"
+           asp-area=""
+           asp-controller="Usuario"
+           asp-action="Registrar">
+            ir a crear
+        </a>
     </div>
 </div>
 
@@ -16,7 +22,7 @@
     <table class="table table-dark">
         <thead>
             <tr>
-                <th scope="col">Nombre</th>
+                <th scope="col">Modificar</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Correo</th>
@@ -26,6 +32,15 @@
             @foreach (var usuario in Model)
             {
             <tr>
+                <th scope="row">
+                    <a class="btn btn-outline-info"
+                       asp-area=""
+                       asp-controller="Usuario"
+                       asp-action="Actualizar"
+                       asp-route-UserId="@usuario.Id">
+                        ir
+                    </a>
+                </th>
                 <td>@usuario.Nombre</td>
                 <td>@usuario.Apellido</td>
                 <td>@usuario.Email</td>
