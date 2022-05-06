@@ -17,14 +17,18 @@
         <thead>
             <tr>
                 <th scope="col">Fecha inicial</th>
+                <th scope="col">Usuario nombre asignado</th>
+                <th scope="col">Usuario correo asignado</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var cita in Model)
             {
-                <tr>
-                    <td>@cita.Fecha</td>
-                </tr>
+            <tr>
+                <td>@cita.Fecha</td>
+                <td>@cita.Usuario.Nombre</td>
+                <td>@cita.Usuario.Email</td>
+            </tr>
             }
         </tbody>
     </table>

@@ -115,5 +115,20 @@ namespace Abogado.Infrastructure.Persistencia
                 throw new Exception($"no se completo la operacion: {e.Message}");
             }
         }
+
+        public async Task<List<T>> GetNested<T>(string nested) where T : Entity
+        {
+            try
+            {
+                return await context.Set<T>()
+                    .Include(nested)
+                    .ToListAsync();
+            }
+
+            catch (Exception e)
+            {
+                throw new Exception($"{e.Message}");
+            }
+        }
     }
 }

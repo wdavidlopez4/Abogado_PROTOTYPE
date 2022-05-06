@@ -23,5 +23,7 @@ namespace Abogado.Domain.Ports
         public Task Update<T>(T obj) where T : Entity;
 
         public bool Exists<T>(Expression<Func<T, bool>> expression) where T : Entity;
+
+        public Task<List<T>> GetNested<T>(string nested) where T : Entity;
     }
 }

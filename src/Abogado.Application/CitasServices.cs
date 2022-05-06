@@ -26,7 +26,7 @@ namespace Abogado.Application
 
         public async Task<List<Cita>> Listar()
         {
-            return await this.repository.GetAll<Cita>();
+            return await this.repository.GetNested<Cita>(nameof(Usuario));
         }
     }
 }
