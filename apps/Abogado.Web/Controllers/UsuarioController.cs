@@ -75,7 +75,7 @@ namespace Abogado.Web.Controllers
         {
             if (memoryCache.Get("TIPO") == null)
                 return RedirectToAction("Index", "Home");
-            else if (memoryCache.Get("TIPO").ToString() == "2")
+            else if (memoryCache.Get("TIPO").ToString() == "3")
                 return RedirectToAction("Permisos", "Caso");
 
             var users = await services.Listar();

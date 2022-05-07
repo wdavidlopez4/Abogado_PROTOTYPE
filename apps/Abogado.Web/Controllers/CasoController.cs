@@ -32,7 +32,9 @@ namespace Abogado.Web.Controllers
         {
             if (memoryCache.Get("TIPO") == null)
                 return RedirectToAction("Index", "Home");
-            else if (memoryCache.Get("TIPO").ToString() == "0")
+            else if (memoryCache.Get("TIPO").ToString() == "0" ||
+                memoryCache.Get("TIPO").ToString() == "1" ||
+                memoryCache.Get("TIPO").ToString() == "2")
                 return View();
             
             return RedirectToAction("Permisos", "Caso");
@@ -44,14 +46,26 @@ namespace Abogado.Web.Controllers
             var vm = new CasoUsuarioVM();
             vm.Usuarios = await this.Usersservices.Listar();
 
-            return View(vm);
+            if (memoryCache.Get("TIPO") == null)
+                return RedirectToAction("Index", "Home");
+            else if (memoryCache.Get("TIPO").ToString() == "0" ||
+                memoryCache.Get("TIPO").ToString() == "1")
+                return View(vm);
+
+            return RedirectToAction("Permisos", "Caso");
         }
 
         [HttpGet]
         public IActionResult CrearCaso(string idUser)
         {
             TempData["USUARIO_ID_CASO"] = idUser;
-            return View();
+
+            if (memoryCache.Get("TIPO") == null)
+                return RedirectToAction("Index", "Home");
+            else if (memoryCache.Get("TIPO").ToString() == "0")
+                return View();
+
+            return RedirectToAction("Permisos", "Caso");
         }
 
         [HttpPost]
@@ -81,7 +95,13 @@ namespace Abogado.Web.Controllers
             var vm = new CasoUsuarioVM();
             vm.Casos = await this.CasoServices.Listar();
 
-            return View(vm);
+            if (memoryCache.Get("TIPO") == null)
+                return RedirectToAction("Index", "Home");
+            else if (memoryCache.Get("TIPO").ToString() == "0" ||
+                memoryCache.Get("TIPO").ToString() == "1")
+                return View(vm);
+
+            return RedirectToAction("Permisos", "Caso");
         }
 
 
@@ -91,7 +111,12 @@ namespace Abogado.Web.Controllers
             var vm = new CasoUsuarioVM();
             vm.Casos = await this.CasoServices.Listar();
 
-            return View(vm);
+            if (memoryCache.Get("TIPO") == null)
+                return RedirectToAction("Index", "Home");
+            else if (memoryCache.Get("TIPO").ToString() == "0")
+                return View(vm);
+
+            return RedirectToAction("Permisos", "Caso");
         }
 
         [HttpGet]
@@ -136,6 +161,11 @@ namespace Abogado.Web.Controllers
         {
             var file = await this.CasoServices.PrepararArchivoParaDescargar(CasoId);
             return File(file, "application/pdf",  "caso_archivo.pdf");
+        }
+
+        public IActionResult Permisos()
+        {
+            return View();
         }
     }
 }
